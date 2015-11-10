@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<!-- Don't forget to set system property
+-DLog4jContextSelector=org.apache.logging.log4j.core.async.AsyncLoggerContextSelector
+     to make all loggers asynchronous. -->
+ 
+<Configuration status="warn">
+  <Appenders>
+    <!-- Async Loggers will auto-flush in batches, so switch off immediateFlush. -->
+    <RandomAccessFile name="RandomAccessFile" fileName="C:\metlife\logs\UISProto\UISProto.log" immediateFlush="false" append="true">
+      <PatternLayout>
+        <!--  <Pattern>%d %p %c{1.} [%t] %X %m %ex%n</Pattern>  -->
+        <!--  bwlogFormat: date(ISO8601) ms priority category hostname <appName custNum userID sessionID> eventID message exception-->
+        <!--  pattern below mimics bwlogformat -->
+        <Pattern>%d{ISO8601}\t%p\t%c\t%X\t%m\t%ex%n</Pattern>
+      </PatternLayout>
+    </RandomAccessFile>
+  </Appenders>
+  <Loggers>
+    <Root level="debug" includeLocation="false">
+      <AppenderRef ref="RandomAccessFile"/>
+    </Root>
+  </Loggers>
+</Configuration>
